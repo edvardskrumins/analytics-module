@@ -3,7 +3,7 @@
 namespace TetOtt\AnalyticsModule;
 
 use Illuminate\Support\ServiceProvider;
-
+use Illuminate\Support\Facades\Route;
 /**
  * Analytics Module Service Provider
  */
@@ -15,7 +15,9 @@ class AnalyticsModuleServiceProvider extends ServiceProvider
             __DIR__.'/../database/migrations' => database_path('migrations'),
         ]);
 
-         $this->loadRoutesFrom(__DIR__.'/../routes/api.php');
+        Route::prefix('api')->group(function () {
+            $this->loadRoutesFrom(__DIR__.'/../routes/api.php');
+        });
     }
 }
 
