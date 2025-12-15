@@ -2,8 +2,8 @@
     "$schema": "https://getcomposer.org/schema.json",
     "name": "tet-ott/analytics-module",
     "type": "project",
-    "description": "Analytics Module for OTT platform - tracks viewing sessions, watch history, and analytics events",
-    "keywords": ["laravel", "package", "ott", "analytics", "tracking", "viewing"],
+    "description": "Analytics Module for OTT platform",
+    "keywords": ["laravel"],
     "license": "MIT",
     "require": {
         "php": "^8.2",
