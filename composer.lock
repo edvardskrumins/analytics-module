@@ -6364,12 +6364,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/edvardskrumins/helper-module.git",
-                "reference": "5fcd6670508f4fd2f06e7094d41b151411dc4c5e"
+                "reference": "2a7f92ba8bd654e6b504bf3781bf347ad7a96f9b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/edvardskrumins/helper-module/zipball/5fcd6670508f4fd2f06e7094d41b151411dc4c5e",
-                "reference": "5fcd6670508f4fd2f06e7094d41b151411dc4c5e",
+                "url": "https://api.github.com/repos/edvardskrumins/helper-module/zipball/2a7f92ba8bd654e6b504bf3781bf347ad7a96f9b",
+                "reference": "2a7f92ba8bd654e6b504bf3781bf347ad7a96f9b",
                 "shasum": ""
             },
             "require": {
@@ -6461,7 +6461,7 @@
                 "source": "https://github.com/edvardskrumins/helper-module/tree/main",
                 "issues": "https://github.com/edvardskrumins/helper-module/issues"
             },
-            "time": "2025-12-16T01:01:01+00:00"
+            "time": "2025-12-16T12:15:54+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",

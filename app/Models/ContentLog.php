@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use TetOtt\HelperModule\Constants\ContentActions;
+use \App\Jobs\LogContentInteraction;
 
 class ContentLog extends Model
 {
@@ -34,7 +35,7 @@ class ContentLog extends Model
             $sessionId = session()->getId();
         }
 
-        \App\Jobs\LogContentInteraction::dispatch(
+        LogContentInteraction::dispatch(
             $contentId,
             $action,
             $sessionId,
