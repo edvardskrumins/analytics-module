@@ -1,9 +1,9 @@
 <?php
 
-use App\Models\ContentLog;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use TetOtt\HelperModule\Constants\ContentActions;
 
 return new class extends Migration
 {
@@ -16,8 +16,7 @@ return new class extends Migration
             Schema::create('content_logs', function (Blueprint $table) {
                 $table->id();
                 $table->unsignedBigInteger('content_id')->nullable();
-                // Keep this enum in sync with App\Models\ContentLog::ACTIONS
-                $table->enum('action', ContentLog::ACTIONS);
+                $table->enum('action', ContentActions::ACTIONS);
                 $table->string('session_id')->nullable(); 
                 $table->string('ip_address')->nullable();
                 $table->string('user_agent')->nullable();

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e38fa4b6ff57eaa16d945b98188e794e",
+    "content-hash": "6bbe8bfbc6189241a76cc3a12cc2d2d6",
     "packages": [
         {
             "name": "brick/math",
@@ -6359,6 +6359,111 @@
             "time": "2025-10-27T20:36:44+00:00"
         },
         {
+            "name": "tet-ott/helper-module",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/edvardskrumins/helper-module.git",
+                "reference": "5fcd6670508f4fd2f06e7094d41b151411dc4c5e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/edvardskrumins/helper-module/zipball/5fcd6670508f4fd2f06e7094d41b151411dc4c5e",
+                "reference": "5fcd6670508f4fd2f06e7094d41b151411dc4c5e",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^12.0",
+                "laravel/octane": "^2.0",
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "fakerphp/faker": "^1.23",
+                "laravel/pail": "^1.2.2",
+                "laravel/pint": "^1.24",
+                "laravel/sail": "^1.41",
+                "laravel/telescope": "^5.16",
+                "mockery/mockery": "^1.6",
+                "nunomaduro/collision": "^8.6",
+                "phpunit/phpunit": "^11.5.3"
+            },
+            "default-branch": true,
+            "type": "project",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "TetOtt\\HelperModule\\HelperModuleServiceProvider"
+                    ],
+                    "dont-discover": []
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "App\\": "app/",
+                    "TetOtt\\HelperModule\\": "src/",
+                    "Database\\Factories\\": "database/factories/",
+                    "Database\\Seeders\\": "database/seeders/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Tests\\": "tests/"
+                }
+            },
+            "scripts": {
+                "setup": [
+                    "composer install",
+                    "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+                    "@php artisan key:generate",
+                    "@php artisan migrate --force",
+                    "npm install",
+                    "npm run build"
+                ],
+                "dev": [
+                    "Composer\\Config::disableProcessTimeout",
+                    "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"php artisan pail --timeout=0\" \"npm run dev\" --names=server,queue,logs,vite --kill-others"
+                ],
+                "test": [
+                    "@php artisan config:clear --ansi",
+                    "@php artisan test"
+                ],
+                "post-autoload-dump": [
+                    "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+                    "@php artisan package:discover --ansi"
+                ],
+                "post-update-cmd": [
+                    "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+                ],
+                "post-root-package-install": [
+                    "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+                ],
+                "post-create-project-cmd": [
+                    "@php artisan key:generate --ansi",
+                    "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
+                    "@php artisan migrate --graceful --ansi"
+                ],
+                "pre-package-uninstall": [
+                    "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Helper module providing common utilities and services for OTT platform modules",
+            "keywords": [
+                "helper",
+                "laravel",
+                "ott",
+                "package",
+                "utilities"
+            ],
+            "support": {
+                "source": "https://github.com/edvardskrumins/helper-module/tree/main",
+                "issues": "https://github.com/edvardskrumins/helper-module/issues"
+            },
+            "time": "2025-12-16T01:01:01+00:00"
+        },
+        {
             "name": "tijsverkoyen/css-to-inline-styles",
             "version": "v2.4.0",
             "source": {
@@ -9069,8 +9174,10 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
-    "stability-flags": {},
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "tet-ott/helper-module": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

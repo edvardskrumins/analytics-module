@@ -10,8 +10,15 @@
         "laravel/framework": "^12.0",
         "laravel/octane": "^2.0",
         "laravel/tinker": "^2.10.1",
-        "vladimir-yuldashev/laravel-queue-rabbitmq": "^14.4"
+        "vladimir-yuldashev/laravel-queue-rabbitmq": "^14.4",
+        "tet-ott/helper-module": "dev-main"
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/edvardskrumins/helper-module.git"
+        }
+    ],
     "require-dev": {
         "fakerphp/faker": "^1.23",
         "laravel/pail": "^1.2.2",
@@ -88,6 +95,6 @@
             "php-http/discovery": true
         }
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "prefer-stable": true
 }

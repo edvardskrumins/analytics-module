@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
-use App\Models\ContentLog;
 use Illuminate\Foundation\Http\FormRequest;
+use TetOtt\HelperModule\Constants\ContentActions;
 
 class UpdateLogRequest extends FormRequest
 {
@@ -23,7 +23,7 @@ class UpdateLogRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'action' => ['sometimes', 'string', 'in:'.implode(',', ContentLog::ACTIONS)],
+            'action' => ['sometimes', 'string', 'in:'.ContentActions::asString()],
         ];
     }
 }

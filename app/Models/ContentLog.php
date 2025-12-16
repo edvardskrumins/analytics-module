@@ -4,21 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use TetOtt\HelperModule\Constants\ContentActions;
 
 class ContentLog extends Model
 {
     use HasFactory;
-
-    /**
-     * Allowed action types for content logs.
-     */
-    public const ACTIONS = [
-        'play',
-        'pause',
-        'complete',
-        'like',
-        'share',
-    ];
 
     protected $fillable = [
         'content_id',
@@ -104,11 +94,11 @@ class ContentLog extends Model
 
         return [
             'total_interactions' => $logs->count(),
-            'plays' => (clone $logs)->where('action', 'play')->count(),
-            'pauses' => (clone $logs)->where('action', 'pause')->count(),
-            'completions' => (clone $logs)->where('action', 'complete')->count(),
-            'likes' => (clone $logs)->where('action', 'like')->count(),
-            'shares' => (clone $logs)->where('action', 'share')->count(),
+            'plays' => (clone $logs)->where('action', ContentActions::PLAY)->count(),
+            'pauses' => (clone $logs)->where('action', ContentActions::PAUSE)->count(),
+            'completions' => (clone $logs)->where('action', ContentActions::COMPLETE)->count(),
+            'likes' => (clone $logs)->where('action', ContentActions::LIKE)->count(),
+            'shares' => (clone $logs)->where('action', ContentActions::SHARE)->count(),
             'unique_sessions' => (clone $logs)->distinct('session_id')->count('session_id'),
         ];
     }

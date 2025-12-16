@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
-use App\Models\ContentLog;
 use Illuminate\Foundation\Http\FormRequest;
+use TetOtt\HelperModule\Constants\ContentActions;
 
 class StoreLogRequest extends FormRequest
 {
@@ -24,7 +24,7 @@ class StoreLogRequest extends FormRequest
     {
         return [
             'content_id' => 'nullable|integer',
-            'action' => ['required', 'string', 'in:'.implode(',', ContentLog::ACTIONS)],
+            'action' => ['required', 'string', 'in:'.ContentActions::asString()],
         ];
     }
 }

@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\ContentLog;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use TetOtt\HelperModule\Constants\ContentActions;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\ContentLog>
@@ -26,7 +27,7 @@ class ContentLogFactory extends Factory
     {
         return [
             'content_id' => $this->faker->numberBetween(1, 100),
-            'action' => $this->faker->randomElement(ContentLog::ACTIONS),
+            'action' => $this->faker->randomElement(ContentActions::ACTIONS),
             'session_id' => $this->faker->uuid(),
             'ip_address' => $this->faker->ipv4(),
             'user_agent' => $this->faker->userAgent(),

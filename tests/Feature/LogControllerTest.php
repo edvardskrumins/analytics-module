@@ -6,6 +6,7 @@ use App\Models\ContentLog;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Queue;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
+use TetOtt\HelperModule\Constants\ContentActions;
 use Tests\TestCase;
 
 class LogControllerTest extends TestCase
@@ -65,7 +66,7 @@ class LogControllerTest extends TestCase
 
         $data = [
             'content_id' => 1,
-            'action' => 'play',
+            'action' => ContentActions::PLAY,
         ];
 
         $response = $this->postJson('/api/analytics-module/logs', $data);
@@ -111,14 +112,14 @@ class LogControllerTest extends TestCase
         Queue::fake();
 
         $data = [
-            'action' => 'play',
+            'action' => ContentActions::PLAY,
         ];
 
         $response = $this->postJson('/api/analytics-module/logs', $data);
         $response->assertStatus(HttpResponse::HTTP_ACCEPTED);
 
         Queue::assertPushed(\App\Jobs\LogContentInteraction::class, function ($job) {
-            return $job->contentId === null && $job->action === 'play';
+            return $job->contentId === null && $job->action === ContentActions::PLAY;
         });
     }
 
@@ -155,8 +156,8 @@ class LogControllerTest extends TestCase
      */
     public function testUpdateUpdatesExistingLog(): void
     {
-        $log = ContentLog::factory()->create(['action' => 'play']);
-        $updateData = ['action' => 'pause'];
+        $log = ContentLog::factory()->create(['action' => ContentActions::PLAY]);
+        $updateData = ['action' => ContentActions::PAUSE];
 
         $response = $this->putJson("/api/analytics-module/logs/{$log->id}", $updateData);
         $response->assertStatus(HttpResponse::HTTP_OK)
@@ -193,7 +194,7 @@ class LogControllerTest extends TestCase
      */
     public function testUpdateReturns404ForNonExistentLog(): void
     {
-        $updateData = ['action' => 'play'];
+        $updateData = ['action' => ContentActions::PLAY];
 
         $response = $this->putJson('/api/analytics-module/logs/999', $updateData);
         $response->assertStatus(HttpResponse::HTTP_NOT_FOUND);
@@ -269,13 +270,13 @@ class LogControllerTest extends TestCase
     public function testContentStatisticsReturnsStatisticsForContent(): void
     {
         $contentId = 1;
-        ContentLog::factory()->create(['content_id' => $contentId, 'action' => 'play']);
-        ContentLog::factory()->create(['content_id' => $contentId, 'action' => 'play']);
-        ContentLog::factory()->create(['content_id' => $contentId, 'action' => 'pause']);
-        ContentLog::factory()->create(['content_id' => $contentId, 'action' => 'complete']);
-        ContentLog::factory()->create(['content_id' => $contentId, 'action' => 'like']);
-        ContentLog::factory()->create(['content_id' => $contentId, 'action' => 'share']);
-        ContentLog::factory()->create(['content_id' => 2, 'action' => 'play']);
+        ContentLog::factory()->create(['content_id' => $contentId, 'action' => ContentActions::PLAY]);
+        ContentLog::factory()->create(['content_id' => $contentId, 'action' => ContentActions::PLAY]);
+        ContentLog::factory()->create(['content_id' => $contentId, 'action' => ContentActions::PAUSE]);
+        ContentLog::factory()->create(['content_id' => $contentId, 'action' => ContentActions::COMPLETE]);
+        ContentLog::factory()->create(['content_id' => $contentId, 'action' => ContentActions::LIKE]);
+        ContentLog::factory()->create(['content_id' => $contentId, 'action' => ContentActions::SHARE]);
+        ContentLog::factory()->create(['content_id' => 2, 'action' => ContentActions::PLAY]);
 
         $response = $this->getJson("/api/analytics-module/logs/content/{$contentId}/statistics");
         $response->assertStatus(HttpResponse::HTTP_OK)
